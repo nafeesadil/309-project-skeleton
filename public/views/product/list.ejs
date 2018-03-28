@@ -1,5 +1,4 @@
-
-<h1>Products List</h1>
+<h1>Product List</h1>
 <% console.log(products) %>
   <% for(var i=0; i<products.length; i++) { %>
     <h1> <%= products[i].name %> </h1>
@@ -7,6 +6,5 @@
       <%= products[i].user%>
     </p>
     <h3><%= products[i].description%></h3>
-    <h3><%= products[i].price%></h3>
-    <h3><%= products[i].quantity%></h3>
+    <h3><%= products[i].created%></h3>
     <% } %>

@@ -3,6 +3,44 @@ var Product = require('./../models/Product.js');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
 
+module.exports.createView = function(req, res){
+  res.render('./../public/views/product/new.ejs', {
+          user: req.user || null,
+          request: req
+        });
+};
+
+module.exports.singleView = function(req, res){
+  res.render('./../public/views/product/view.ejs', {
+          user: req.user || null,
+          request: req
+        });
+}
+
+module.exports.listView = function(req, res) {
+    Product.find(function(err, data) {
+      if (err) {
+        return res.status(400).send({
+
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+      else {
+        console.log("api called");
+
+        res.render('./../public/views/product/all.ejs', {
+          user: req.user || null,
+          request: req,
+          products: data
+        });
+      }
+    });
+  
+	
+};
+
+
+
 module.exports.list = function(req, res) {
   Product.find(function(err, data) {
     if (err) {
@@ -34,7 +72,7 @@ module.exports.create = function(req, res) {
 };
 
 module.exports.read = function(req, res) {
-  res.json(req.article);
+  res.json(req.product);
 };
 
 
